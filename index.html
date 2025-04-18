@@ -1,129 +1,148 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SiteFury Hosting</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-    };
-  </script>
-</head>
-<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      .glass {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
 
-  <!-- Top Bar -->
-  <div class="bg-blue-600 text-white text-sm">
-    <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
-      <div class="flex items-center space-x-4">
-        <span>📧 info@sitefury.in</span>
-        <span>📞 +1234567890</span>
-      </div>
-      <div class="space-x-4 flex items-center">
-        <button onclick="toggleDarkMode()" class="bg-white text-blue-600 font-bold px-3 py-1 rounded hover:bg-gray-100 transition text-xs">🌙 Dark Mode</button>
-        <a href="#" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-3 py-1 rounded transition text-xs">Know More</a>
-      </div>
-    </div>
-  </div>
+      .dark .glass {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-purple-200 via-pink-100 to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-800 dark:text-white transition-colors duration-500">
 
-  <!-- Sticky Navbar -->
-  <header class="bg-white dark:bg-gray-800 shadow sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="text-blue-700 dark:text-yellow-400 font-extrabold text-xl leading-4">
-        <span class="block">SiteFury</span>
-        <span class="text-sm">Hosting</span>
-      </div>
-
-      <button id="menuBtn" class="md:hidden text-gray-700 dark:text-white focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+    <!-- Toggle Dark Mode -->
+    <div class="flex justify-end p-4">
+      <button
+        onclick="toggleTheme(); navigator.vibrate(30);"
+        class="glass rounded-xl p-2 hover:scale-105 transition"
+      >
+        <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+        <i data-lucide="sun" class="w-5 h-5 hidden dark:inline"></i>
       </button>
-
-      <nav id="navMenu" class="hidden md:flex space-x-6 text-sm items-center font-semibold">
-        <a href="#" class="hover:text-blue-600 dark:hover:text-yellow-400 transition">Home</a>
-        <a href="#" class="hover:text-blue-600 dark:hover:text-yellow-400 transition">About Us</a>
-        <a href="#" class="hover:text-blue-600 dark:hover:text-yellow-400 transition">Blog</a>
-        <a href="#" class="hover:text-blue-600 dark:hover:text-yellow-400 transition">Services</a>
-        <a href="#" class="hover:text-blue-600 dark:hover:text-yellow-400 transition">Contact</a>
-        <a href="#" class="hover:text-blue-600 dark:hover:text-yellow-400 transition">Privacy Policy</a>
-        <a href="#" class="hover:text-blue-600 dark:hover:text-yellow-400 transition">Terms of Service</a>
-        <button onclick="openModal('loginModal')" class="text-blue-600 dark:text-yellow-400 hover:underline">Login</button>
-        <button onclick="openModal('signupModal')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Sign Up</button>
-      </nav>
     </div>
 
-    <!-- Mobile Dropdown -->
-    <div id="mobileMenu" class="md:hidden hidden px-4 pb-4 space-y-2 font-semibold bg-white dark:bg-gray-800">
-      <a href="#" class="block hover:text-blue-600 dark:hover:text-yellow-400">Home</a>
-      <a href="#" class="block hover:text-blue-600 dark:hover:text-yellow-400">About Us</a>
-      <a href="#" class="block hover:text-blue-600 dark:hover:text-yellow-400">Blog</a>
-      <a href="#" class="block hover:text-blue-600 dark:hover:text-yellow-400">Services</a>
-      <a href="#" class="block hover:text-blue-600 dark:hover:text-yellow-400">Contact</a>
-      <a href="#" class="block hover:text-blue-600 dark:hover:text-yellow-400">Privacy Policy</a>
-      <a href="#" class="block hover:text-blue-600 dark:hover:text-yellow-400">Terms of Service</a>
-      <button onclick="openModal('loginModal')" class="block text-blue-600 dark:text-yellow-400">Login</button>
-      <button onclick="openModal('signupModal')" class="block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center">Sign Up</button>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-4 py-12 text-center">
-    <h1 class="text-3xl font-bold">Welcome to SiteFury Hosting</h1>
-    <p class="mt-2 text-gray-600 dark:text-gray-300">Fast. Reliable. Scalable hosting services.</p>
-  </main>
-
-  <!-- Login Modal -->
-  <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-white dark:bg-gray-800 p-6 rounded shadow-md w-full max-w-sm">
-      <h2 class="text-xl font-bold mb-4">Login</h2>
-      <input type="email" placeholder="Email" class="w-full mb-3 px-3 py-2 border rounded dark:bg-gray-700" />
-      <input type="password" placeholder="Password" class="w-full mb-4 px-3 py-2 border rounded dark:bg-gray-700" />
-      <div class="flex justify-end space-x-2">
-        <button onclick="closeModal('loginModal')" class="px-4 py-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700">Cancel</button>
-        <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Login</button>
+    <!-- Hero Section -->
+    <section class="text-center py-10 px-4">
+      <div class="glass mx-auto p-10 rounded-2xl max-w-3xl">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Hi, I'm Alex</h1>
+        <p class="mb-6 text-lg text-gray-600 dark:text-gray-300">
+          A creative developer crafting elegant digital experiences.
+        </p>
+        <lottie-player
+          src="https://assets2.lottiefiles.com/packages/lf20_puciaact.json"
+          background="transparent"
+          speed="1"
+          style="width: 200px; height: 200px; margin: 0 auto;"
+          loop
+          autoplay
+        ></lottie-player>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Sign Up Modal -->
-  <div id="signupModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-white dark:bg-gray-800 p-6 rounded shadow-md w-full max-w-sm">
-      <h2 class="text-xl font-bold mb-4">Sign Up</h2>
-      <input type="text" placeholder="Name" class="w-full mb-3 px-3 py-2 border rounded dark:bg-gray-700" />
-      <input type="email" placeholder="Email" class="w-full mb-3 px-3 py-2 border rounded dark:bg-gray-700" />
-      <input type="password" placeholder="Password" class="w-full mb-4 px-3 py-2 border rounded dark:bg-gray-700" />
-      <div class="flex justify-end space-x-2">
-        <button onclick="closeModal('signupModal')" class="px-4 py-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700">Cancel</button>
-        <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Sign Up</button>
+    <!-- Portfolio -->
+    <section class="py-10 px-6">
+      <h2 class="text-3xl font-semibold mb-6 text-center">Portfolio</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div onclick="navigator.vibrate(50);" class="glass p-6 rounded-xl hover:scale-105 transition cursor-pointer">
+          <i data-lucide="code" class="w-6 h-6 mb-3"></i>
+          <h3 class="font-semibold text-xl">Project One</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Description of project.</p>
+        </div>
+        <div onclick="navigator.vibrate(50);" class="glass p-6 rounded-xl hover:scale-105 transition cursor-pointer">
+          <i data-lucide="layout" class="w-6 h-6 mb-3"></i>
+          <h3 class="font-semibold text-xl">Project Two</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Another project highlight.</p>
+        </div>
+        <div onclick="navigator.vibrate(50);" class="glass p-6 rounded-xl hover:scale-105 transition cursor-pointer">
+          <i data-lucide="smartphone" class="w-6 h-6 mb-3"></i>
+          <h3 class="font-semibold text-xl">Mobile App</h3>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Cross-platform UI.</p>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Scripts -->
-  <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
+    <!-- Blog -->
+    <section class="py-10 px-6">
+      <h2 class="text-3xl font-semibold mb-6 text-center">Blog</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="glass p-6 rounded-xl">
+          <h3 class="text-xl font-semibold mb-2">Latest Trends in Frontend</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">A quick dive into 2025 trends.</p>
+        </div>
+        <div class="glass p-6 rounded-xl">
+          <h3 class="text-xl font-semibold mb-2">Design to Code</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">How I convert figma designs.</p>
+        </div>
+      </div>
+    </section>
 
-    function toggleDarkMode() {
-      document.documentElement.classList.toggle('dark');
-    }
+    <!-- Contact Form -->
+    <section class="py-10 px-6">
+      <h2 class="text-3xl font-semibold mb-6 text-center">Contact Me</h2>
+      <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        class="max-w-xl mx-auto glass p-6 rounded-2xl space-y-4"
+        onclick="navigator.vibrate(25);"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          required
+          class="w-full p-3 rounded-xl bg-white/30 dark:bg-white/10 backdrop-blur text-black dark:text-white placeholder-gray-500"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          required
+          class="w-full p-3 rounded-xl bg-white/30 dark:bg-white/10 backdrop-blur text-black dark:text-white placeholder-gray-500"
+        />
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          required
+          class="w-full p-3 rounded-xl bg-white/30 dark:bg-white/10 backdrop-blur text-black dark:text-white placeholder-gray-500"
+          rows="4"
+        ></textarea>
+        <button
+          type="submit"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl"
+        >
+          Send
+        </button>
+      </form>
+    </section>
 
-    function openModal(id) {
-      document.getElementById(id).classList.remove('hidden');
-      document.getElementById(id).classList.add('flex');
-    }
+    <footer class="text-center py-6 text-sm text-gray-500 dark:text-gray-400">
+      © 2025 Alex. Built with ❤️
+    </footer>
 
-    function closeModal(id) {
-      document.getElementById(id).classList.add('hidden');
-      document.getElementById(id).classList.remove('flex');
-    }
-  </script>
-
-</body>
+    <script>
+      function toggleTheme() {
+        document.documentElement.classList.toggle("dark");
+      }
+      lucide.createIcons();
+    </script>
+  </body>
 </html>
